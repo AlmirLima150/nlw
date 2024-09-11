@@ -33,8 +33,10 @@ const start = async () => {
             const meta = metas.find((m) => {
                 return m.value == resposta
             })
+            meta.checked = true
         })
-            
+        
+        console.log("Meta(s) comcluídas(s)")
         }
 
 
