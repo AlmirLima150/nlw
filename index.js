@@ -29,14 +29,17 @@ const start = async () => {
             return
         }
 
+        respostas.forEach((m) => {
+            m.checked = false
+        })
+
         respostas.forEach((resposta) => {
             const meta = metas.find((m) => {
                 return m.value == resposta
             })
             meta.checked = true
         })
-        
-        console.log("Meta(s) comcluídas(s)")
+        console.log("Meta(s) marcadas como concluídas(s)")
         }
 
 
