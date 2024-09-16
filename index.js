@@ -75,6 +75,30 @@ const start = async () => {
         })
     }
 
+    const removerMetas = async() => {
+        const metasDesmarcadas = metas.map((meta) => {
+            return { velue: meta.value, checked: false }
+        })
+        
+        const itemsADeletar = await checkbox({
+            message:"Use as setas para movimentar, espaço para marcar e entar para confirmar",
+            choices: [...metasDesmarcadas],
+            instructions: false,
+        })
+
+        if(itemsADeletar.length == 0){
+            console.log("Nenhum item selecionado!")
+            return
+        }
+
+        itemsADeletar.forEach((item) => {
+            metas.filter((meta) => {
+                return meta.velue != item
+            })
+        })
+        console.log("Meta(s) deletada(s) com sucesso!")
+    }
+
     while (true){
         const opcao =  await select({
             message: "Menu >",
@@ -96,6 +120,10 @@ const start = async () => {
                     value: "abertas"
                 },
                 {
+                    name: "Remover abertas",
+                    value: "remover"
+                },
+                {
                     name: "Sair",
                     value: "sair"
                 }
@@ -114,6 +142,9 @@ const start = async () => {
                 break
             case "abertas":
                 await metasAbertas()
+                break
+            case "remover":
+                await removerMetas()
                 break
             case "sair":
                 return 
